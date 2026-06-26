@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LUCID — Product</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0b10;--bg-soft:#10121b;--panel:#14161f;--ink:#f3f4f8;--muted:#9aa0b4;
+    --line:rgba(255,255,255,.08);--focus:#5b8cff;--focus-2:#7ad0ff;--rest:#9a7bff;--rest-2:#c79bff;
+    --gold:#e9c98b;--radius:18px;--maxw:1160px;--ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;margin:0;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;padding:14px 26px;border-radius:100px;font-weight:600;font-size:15px;font-family:inherit;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+  .btn-primary{background:var(--ink);color:#0a0b10}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,255,255,.12)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(10,11,16,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Fraunces',serif;font-size:24px;letter-spacing:.16em;font-weight:600;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--focus),var(--rest));box-shadow:0 0 16px var(--rest)}
+  .nav-links{display:flex;gap:30px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .2s}.nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  @media(max-width:780px){.nav-links{display:none}.nav-cta .btn-ghost{display:none}}
+
+  .crumb{padding:26px 0 0;color:var(--muted);font-size:13px}
+  .crumb a:hover{color:var(--ink)}
+
+  .detail{display:grid;grid-template-columns:1fr 1fr;gap:50px;padding:36px 0 70px;align-items:start}
+  @media(max-width:860px){.detail{grid-template-columns:1fr;gap:30px}}
+
+  .media{position:relative;border:1px solid var(--line);border-radius:24px;overflow:hidden;min-height:440px;display:flex;align-items:center;justify-content:center;position:sticky;top:90px}
+  @media(max-width:860px){.media{position:relative;top:0;min-height:360px}}
+  .media.focus{background:linear-gradient(165deg,rgba(91,140,255,.14),rgba(20,22,31,0))}
+  .media.rest{background:linear-gradient(165deg,rgba(154,123,255,.14),rgba(20,22,31,0))}
+  .media .aura{position:absolute;width:340px;height:340px;border-radius:50%;filter:blur(80px);opacity:.45;top:-60px}
+  .media.focus .aura{background:var(--focus)}.media.rest .aura{background:var(--rest)}
+
+  /* visuals (scaled up) */
+  .viz{position:relative;z-index:1}
+  .viz .lbl{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+  .viz .lbl b{font-family:'Fraunces',serif;color:#0a0b10;letter-spacing:.1em}
+  .viz .lbl small{font-size:10px;letter-spacing:.16em;color:rgba(10,11,16,.7);text-transform:uppercase}
+  .vial{width:140px;height:250px;border-radius:20px 20px 28px 28px;position:relative;
+    background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.03));border:1px solid var(--line);
+    box-shadow:0 40px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.2)}
+  .vial::before{content:"";position:absolute;left:50%;top:-18px;transform:translateX(-50%);width:60px;height:24px;border-radius:8px 8px 4px 4px;background:#1c1f2b;border:1px solid var(--line)}
+  .vial .lbl{position:absolute;left:12px;right:12px;top:64px;bottom:34px;border-radius:12px}
+  .vial .lbl b{font-size:20px}
+  .media.focus .vial .lbl{background:linear-gradient(160deg,rgba(91,140,255,.92),rgba(122,208,255,.66))}
+  .media.rest .vial .lbl{background:linear-gradient(160deg,rgba(154,123,255,.92),rgba(199,155,255,.62))}
+  .pouch{width:175px;height:250px;border-radius:12px 12px 18px 18px;position:relative;
+    background:linear-gradient(160deg,rgba(91,140,255,.92),rgba(122,208,255,.6));
+    box-shadow:0 40px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.25)}
+  .pouch .seal{position:absolute;top:-9px;left:14px;right:14px;height:18px;background:#1c1f2b;border-radius:4px;
+    -webkit-mask:repeating-linear-gradient(90deg,#000 0 6px,transparent 6px 11px);mask:repeating-linear-gradient(90deg,#000 0 6px,transparent 6px 11px)}
+  .pouch .lbl{position:absolute;inset:40px 20px 30px}
+  .pouch .lbl b{font-size:19px}
+  .box{width:200px;height:210px;border-radius:18px;position:relative;
+    background:linear-gradient(160deg,rgba(154,123,255,.92),rgba(199,155,255,.6));
+    box-shadow:0 40px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.25)}
+  .box .lbl{position:absolute;inset:0}
+  .box .lbl b{font-size:22px}
+
+  .info .form{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+  .info.focus .form{color:var(--focus-2)}.info.rest .form{color:var(--rest-2)}
+  .info h1{font-size:clamp(34px,5vw,52px);margin:12px 0 8px}
+  .info .tagline{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:#d7dae6;margin:0 0 18px}
+  .info .price{font-family:'Fraunces',serif;font-size:34px;margin:0 0 6px}
+  .info .ship{color:var(--muted);font-size:13px}
+  .info .desc{color:#c9cdda;font-size:16px;margin:22px 0 0}
+
+  .flavors{margin:22px 0 0}
+  .flavors .lab{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .flavors .opts{display:flex;flex-wrap:wrap;gap:9px}
+  .flav{font-size:13px;padding:9px 16px;border-radius:100px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;transition:.2s}
+  .flav:hover{color:var(--ink)}
+  .flav.on{color:#0a0b10;background:var(--fa,var(--focus-2));border-color:transparent;font-weight:600}
+
+  .buybar{display:flex;gap:14px;align-items:center;margin:26px 0 0;flex-wrap:wrap}
+  .stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:100px;overflow:hidden}
+  .stepper button{background:none;border:none;color:var(--ink);width:44px;height:48px;font-size:18px;cursor:pointer}
+  .stepper button:hover{background:rgba(255,255,255,.05)}
+  .stepper span{min-width:30px;text-align:center;font-size:16px}
+  .addbig{flex:1;min-width:200px;justify-content:center;border:none;cursor:pointer;padding:15px 26px;border-radius:100px;font-weight:600;font-size:16px;font-family:inherit;color:#0a0b10;transition:transform .2s,box-shadow .2s}
+  .info.focus .addbig{background:linear-gradient(120deg,var(--focus),var(--focus-2))}
+  .info.rest .addbig{background:linear-gradient(120deg,var(--rest),var(--rest-2))}
+  .addbig:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+
+  .bul{list-style:none;padding:0;margin:28px 0 0;border-top:1px solid var(--line)}
+  .bul li{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;color:#d7dae6}
+  .bul li svg{flex:0 0 auto;margin-top:3px}
+  .how{margin:24px 0 0;padding:18px 20px;border-radius:14px;background:var(--bg-soft);border:1px solid var(--line);font-size:14px;color:var(--muted)}
+  .how b{color:var(--ink)}
+  .trustline{display:flex;gap:20px;flex-wrap:wrap;margin:24px 0 0;color:var(--muted);font-size:13px}
+  .trustline span{display:flex;align-items:center;gap:7px}
+  .trustline .ck{color:var(--focus-2)}
+
+  .related{padding:30px 0 90px}
+  .related h2{font-size:30px;margin-bottom:24px;text-align:center}
+  .relgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media(max-width:860px){.relgrid{grid-template-columns:1fr 1fr}}
+  .rel{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--panel);transition:transform .3s,border-color .3s;display:block}
+  .rel:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.18)}
+  .rel .rt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .rel h3{font-size:17px;margin:6px 0 4px}
+  .rel .rp{font-family:'Fraunces',serif;font-size:18px}
+
+  .disc{max-width:var(--maxw);margin:0 auto;padding:0 24px 50px;color:#6b7186;font-size:12px;text-align:center}
+
+  footer{border-top:1px solid var(--line);padding:40px 0}
+  .fb{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+
+<div style="background:linear-gradient(90deg,var(--focus),var(--rest));color:#0a0b10;text-align:center;font-size:13px;font-weight:600;padding:8px 16px">
+  Free shipping over $70 · 15% off your first order with code <b style="letter-spacing:.08em">CLEAR15</b>
+</div>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><span class="dot"></span>LUCID</a>
+    <nav class="nav-links">
+      <a href="index.html#products">Products</a>
+      <a href="index.html#science">Science</a>
+      <a href="index.html#ingredients">Ingredients</a>
+      <a href="about.html">Our Story</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="index.html#products" class="btn btn-ghost">Shop</a>
+      <button class="lucid-cartbtn" aria-label="Open cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 7h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 7a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span class="cnt">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html">Home</a> · <a href="index.html#products">Products</a> · <span id="crumbName">Product</span></div>
+  <div class="detail" id="detail"><!-- rendered by JS --></div>
+</div>
+
+<section class="related">
+  <div class="wrap">
+    <h2>Complete your routine</h2>
+    <div class="relgrid" id="related"></div>
+  </div>
+</section>
+
+<p class="disc" id="disc"></p>
+
+<footer>
+  <div class="wrap fb">
+    <div class="brand" style="font-size:20px"><span class="dot"></span>LUCID</div>
+    <div>© 2026 LUCID Supplements · Privacy · Terms</div>
+  </div>
+</footer>
+
+<script src="catalog.js"></script>
+<script>
+  const params = new URLSearchParams(location.search);
+  let handle = params.get('handle') || PRODUCTS[0].handle;
+  let p = productByHandle(handle) || PRODUCTS[0];
+  let activeFlavor = p.flavors ? p.flavors[0] : null;
+  let qty = 1;
+
+  const ck = (c) => `<svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="${c}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+  function currentVariant(){ return activeFlavor ? activeFlavor.variantId : p.variantId; }
+  function currentSub(){ return activeFlavor ? activeFlavor.name : p.form; }
+
+  function render(){
+    document.title = `LUCID ${p.name} — ${p.tagline}`;
+    document.getElementById('crumbName').textContent = 'LUCID ' + p.name;
+    const accent = p.cat === 'rest' ? '#c79bff' : '#7ad0ff';
+    const flavorHTML = p.flavors ? `
+      <div class="flavors">
+        <div class="lab">Flavor — <b style="color:var(--ink)">${activeFlavor.name}</b></div>
+        <div class="opts">
+          ${p.flavors.map(f=>`<button class="flav ${f===activeFlavor?'on':''}" style="--fa:${f.accent}" data-h="${f.handle}">${f.name}</button>`).join('')}
+        </div>
+      </div>` : '';
+
+    document.getElementById('detail').innerHTML = `
+      <div class="media ${p.cat}"><div class="aura"></div>${productVisual(p, activeFlavor ? activeFlavor.img : null)}</div>
+      <div class="info ${p.cat}">
+        <div class="form">${p.form}</div>
+        <h1>LUCID ${p.name}</h1>
+        <p class="tagline">${p.tagline}</p>
+        <div class="price">$${p.price.toFixed(2)}</div>
+        <div class="ship">Free shipping over $70 · 30-day money-back guarantee</div>
+        <p class="desc">${p.body}</p>
+        ${flavorHTML}
+        <div class="buybar">
+          <div class="stepper">
+            <button id="dec" aria-label="Decrease">−</button><span id="q">${qty}</span><button id="inc" aria-label="Increase">+</button>
+          </div>
+          <button class="addbig" id="add">Add to cart · $${(p.price*qty).toFixed(2)}</button>
+        </div>
+        <ul class="bul">${p.bullets.map(b=>`<li>${ck(accent)} ${b}</li>`).join('')}</ul>
+        <div class="how"><b>How to use:</b> ${p.how}</div>
+        <div class="trustline">
+          <span><span class="ck">✓</span> Third-party tested</span>
+          <span><span class="ck">✓</span> Non-habit forming</span>
+          <span><span class="ck">✓</span> Made in the USA</span>
+        </div>
+      </div>`;
+
+    document.getElementById('inc').onclick = ()=>{ qty++; sync(); };
+    document.getElementById('dec').onclick = ()=>{ if(qty>1){qty--; sync();} };
+    document.getElementById('add').onclick = ()=>{
+      addToCart(currentVariant(), 'LUCID '+p.name, p.price, qty, currentSub());
+      const b=document.getElementById('add'); const t=b.textContent; b.textContent='Added ✓';
+      setTimeout(()=>b.textContent=`Add to cart · $${(p.price*qty).toFixed(2)}`,1300);
+    };
+    document.querySelectorAll('.flav').forEach(btn=>btn.onclick=()=>{
+      activeFlavor = p.flavors.find(f=>f.handle===btn.dataset.h);
+      history.replaceState(null,'', '?handle='+activeFlavor.handle);
+      render();
+    });
+  }
+  function sync(){
+    document.getElementById('q').textContent = qty;
+    document.getElementById('add').textContent = `Add to cart · $${(p.price*qty).toFixed(2)}`;
+  }
+
+  // related products (everything else)
+  function renderRelated(){
+    const others = PRODUCTS.filter(x=>x.handle!==p.handle);
+    document.getElementById('related').innerHTML = others.map(o=>`
+      <a class="rel" href="product.html?handle=${o.handle}">
+        <div class="rt" style="color:${o.cat==='rest'?'var(--rest-2)':'var(--focus-2)'}">${o.cat==='rest'?'Sleep & Rest':'Focus & Brain'}</div>
+        <h3>LUCID ${o.name}</h3>
+        <div class="rp">$${o.price.toFixed(2)}</div>
+      </a>`).join('');
+  }
+
+  document.getElementById('disc').textContent = DISCLAIMER;
+  render();
+  renderRelated();
+</script>
+</body>
+</html>

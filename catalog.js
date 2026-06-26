@@ -1,10 +1,10 @@
 /* ============================================================
-   LUCID — shared catalog + cart
-   Real products & variant IDs from the LUCID Shopify store.
+   Veya — shared catalog + cart
+   Real products & variant IDs from the Veya Shopify store.
    "Add to cart" builds a real Shopify cart permalink at checkout.
    ============================================================ */
 
-const LUCID_SHOP = "zqrvju-gp.myshopify.com";
+const VEYA_SHOP = "zqrvju-gp.myshopify.com";
 const DISCLAIMER =
   "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult a healthcare provider before use, especially if pregnant, nursing, taking medication, or managing a medical condition.";
 
@@ -140,7 +140,7 @@ function checkout() {
   const cart = getCart();
   if (!cart.length) return;
   const path = cart.map((i) => `${i.variantId}:${i.qty}`).join(",");
-  window.location.href = `https://${LUCID_SHOP}/cart/${path}`;
+  window.location.href = `https://${VEYA_SHOP}/cart/${path}`;
 }
 
 /* ---------- cart drawer UI (injected on every page) ---------- */
@@ -264,7 +264,7 @@ function productCard(p) {
     </a>
     <div class="pc-body">
       <div class="pc-form">${p.form}</div>
-      <h3><a href="product.html?handle=${p.handle}">LUCID ${p.name}</a></h3>
+      <h3><a href="product.html?handle=${p.handle}">Veya ${p.name}</a></h3>
       <p class="pc-tag">${p.tagline}</p>
       ${flavorOpts}
       <div class="pc-buy">
@@ -287,7 +287,7 @@ function cssVisual(p) {
 /* Real photo if available, else graceful fallback to the CSS shape */
 function productVisual(p, imgUrl) {
   const url = imgUrl || p.img || (p.flavors && p.flavors[0].img);
-  if (url) return `<img src="${url}" alt="LUCID ${p.name}" class="pviz-img" onerror="lucidImgFail(this,'${p.handle}')">`;
+  if (url) return `<img src="${url}" alt="Veya ${p.name}" class="pviz-img" onerror="lucidImgFail(this,'${p.handle}')">`;
   return cssVisual(p);
 }
 function lucidImgFail(el, handle) {
@@ -321,7 +321,7 @@ function renderCatalog() {
   // add to cart
   document.querySelectorAll(".pc-add").forEach((btn) => {
     btn.addEventListener("click", () => {
-      addToCart(btn.dataset.vid, "LUCID " + btn.dataset.name, parseFloat(btn.dataset.price), 1, btn.dataset.sub);
+      addToCart(btn.dataset.vid, "Veya " + btn.dataset.name, parseFloat(btn.dataset.price), 1, btn.dataset.sub);
       const t = btn.textContent; btn.textContent = "Added ✓";
       setTimeout(() => (btn.textContent = t), 1300);
     });

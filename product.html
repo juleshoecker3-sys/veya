@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LUCID — Product</title>
+<title>Veya — Product</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet" />
@@ -131,7 +131,7 @@
 </div>
 <header class="nav">
   <div class="wrap nav-in">
-    <a href="index.html" class="brand"><span class="dot"></span>LUCID</a>
+    <a href="index.html" class="brand"><span class="dot"></span>VEYA</a>
     <nav class="nav-links">
       <a href="index.html#products">Products</a>
       <a href="index.html#science">Science</a>
@@ -165,8 +165,8 @@
 
 <footer>
   <div class="wrap fb">
-    <div class="brand" style="font-size:20px"><span class="dot"></span>LUCID</div>
-    <div>© 2026 LUCID Supplements · Privacy · Terms</div>
+    <div class="brand" style="font-size:20px"><span class="dot"></span>VEYA</div>
+    <div>© 2026 Veya Supplements · Privacy · Terms</div>
   </div>
 </footer>
 
@@ -184,8 +184,8 @@
   function currentSub(){ return activeFlavor ? activeFlavor.name : p.form; }
 
   function render(){
-    document.title = `LUCID ${p.name} — ${p.tagline}`;
-    document.getElementById('crumbName').textContent = 'LUCID ' + p.name;
+    document.title = `Veya ${p.name} — ${p.tagline}`;
+    document.getElementById('crumbName').textContent = 'Veya ' + p.name;
     const accent = p.cat === 'rest' ? '#c79bff' : '#7ad0ff';
     const flavorHTML = p.flavors ? `
       <div class="flavors">
@@ -199,7 +199,7 @@
       <div class="media ${p.cat}"><div class="aura"></div>${productVisual(p, activeFlavor ? activeFlavor.img : null)}</div>
       <div class="info ${p.cat}">
         <div class="form">${p.form}</div>
-        <h1>LUCID ${p.name}</h1>
+        <h1>Veya ${p.name}</h1>
         <p class="tagline">${p.tagline}</p>
         <div class="price">$${p.price.toFixed(2)}</div>
         <div class="ship">Free shipping over $70 · 30-day money-back guarantee</div>
@@ -223,7 +223,7 @@
     document.getElementById('inc').onclick = ()=>{ qty++; sync(); };
     document.getElementById('dec').onclick = ()=>{ if(qty>1){qty--; sync();} };
     document.getElementById('add').onclick = ()=>{
-      addToCart(currentVariant(), 'LUCID '+p.name, p.price, qty, currentSub());
+      addToCart(currentVariant(), 'Veya '+p.name, p.price, qty, currentSub());
       const b=document.getElementById('add'); const t=b.textContent; b.textContent='Added ✓';
       setTimeout(()=>b.textContent=`Add to cart · $${(p.price*qty).toFixed(2)}`,1300);
     };
@@ -244,7 +244,7 @@
     document.getElementById('related').innerHTML = others.map(o=>`
       <a class="rel" href="product.html?handle=${o.handle}">
         <div class="rt" style="color:${o.cat==='rest'?'var(--rest-2)':'var(--focus-2)'}">${o.cat==='rest'?'Sleep & Rest':'Focus & Brain'}</div>
-        <h3>LUCID ${o.name}</h3>
+        <h3>Veya ${o.name}</h3>
         <div class="rp">$${o.price.toFixed(2)}</div>
       </a>`).join('');
   }

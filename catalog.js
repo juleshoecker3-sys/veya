@@ -261,7 +261,8 @@ function productCard(p) {
     : "";
   const defaultVid = p.flavors ? p.flavors[0].variantId : p.variantId;
   const defaultSub = p.flavors ? p.flavors[0].name : p.form;
-  return `<article class="pc ${p.cat}">
+  const accent = p.accent || (p.flavors && p.flavors[0].accent) || (p.cat === "rest" ? "#b18cff" : "#6fb4ff");
+  return `<article class="pc ${p.cat}" style="--pa:${accent}">
     <a class="pc-media" href="product.html?handle=${p.handle}" aria-label="${p.name}">
       <span class="pc-aura"></span>
       ${productVisual(p)}
@@ -319,6 +320,7 @@ function renderCatalog() {
         const flav = PRODUCTS.flatMap((p) => p.flavors || []).find((f) => f.variantId === btn.dataset.vid);
         const img = card.querySelector(".pc-media .pviz-img");
         if (flav && flav.img && img) img.src = flav.img;
+        if (flav && flav.accent) card.style.setProperty("--pa", flav.accent);
       });
     });
   });

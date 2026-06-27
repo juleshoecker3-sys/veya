@@ -43,10 +43,8 @@
 
   .media{position:relative;border:1px solid var(--line);border-radius:24px;overflow:hidden;min-height:440px;display:flex;align-items:center;justify-content:center;position:sticky;top:90px}
   @media(max-width:860px){.media{position:relative;top:0;min-height:360px}}
-  .media.focus{background:linear-gradient(165deg,rgba(91,140,255,.14),rgba(20,22,31,0))}
-  .media.rest{background:linear-gradient(165deg,rgba(154,123,255,.14),rgba(20,22,31,0))}
-  .media .aura{position:absolute;width:340px;height:340px;border-radius:50%;filter:blur(80px);opacity:.45;top:-60px}
-  .media.focus .aura{background:var(--focus)}.media.rest .aura{background:var(--rest)}
+  .media{background:linear-gradient(165deg,color-mix(in srgb,var(--pa,#7ad0ff) 16%,transparent),transparent)}
+  .media .aura{position:absolute;width:340px;height:340px;border-radius:50%;filter:blur(80px);opacity:.5;top:-60px;background:var(--pa,#7ad0ff)}
 
   /* visuals (scaled up) */
   .viz{position:relative;z-index:1}
@@ -59,8 +57,7 @@
   .vial::before{content:"";position:absolute;left:50%;top:-18px;transform:translateX(-50%);width:60px;height:24px;border-radius:8px 8px 4px 4px;background:#1c1f2b;border:1px solid var(--line)}
   .vial .lbl{position:absolute;left:12px;right:12px;top:64px;bottom:34px;border-radius:12px}
   .vial .lbl b{font-size:20px}
-  .media.focus .vial .lbl{background:linear-gradient(160deg,rgba(91,140,255,.92),rgba(122,208,255,.66))}
-  .media.rest .vial .lbl{background:linear-gradient(160deg,rgba(154,123,255,.92),rgba(199,155,255,.62))}
+  .media .vial .lbl{background:linear-gradient(160deg,var(--pa,#7ad0ff),color-mix(in srgb,var(--pa,#7ad0ff) 55%,white))}
   .pouch{width:175px;height:250px;border-radius:12px 12px 18px 18px;position:relative;
     background:linear-gradient(160deg,rgba(91,140,255,.92),rgba(122,208,255,.6));
     box-shadow:0 40px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.25)}
@@ -74,8 +71,7 @@
   .box .lbl{position:absolute;inset:0}
   .box .lbl b{font-size:22px}
 
-  .info .form{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
-  .info.focus .form{color:var(--focus-2)}.info.rest .form{color:var(--rest-2)}
+  .info .form{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--pa,var(--focus-2))}
   .info h1{font-size:clamp(34px,5vw,52px);margin:12px 0 8px}
   .info .tagline{font-family:'Fraunces',serif;font-style:italic;font-size:22px;color:#d7dae6;margin:0 0 18px}
   .info .price{font-family:'Fraunces',serif;font-size:34px;margin:0 0 6px}
@@ -95,8 +91,7 @@
   .stepper button:hover{background:rgba(255,255,255,.05)}
   .stepper span{min-width:30px;text-align:center;font-size:16px}
   .addbig{flex:1;min-width:200px;justify-content:center;border:none;cursor:pointer;padding:15px 26px;border-radius:100px;font-weight:600;font-size:16px;font-family:inherit;color:#0a0b10;transition:transform .2s,box-shadow .2s}
-  .info.focus .addbig{background:linear-gradient(120deg,var(--focus),var(--focus-2))}
-  .info.rest .addbig{background:linear-gradient(120deg,var(--rest),var(--rest-2))}
+  .info .addbig{background:linear-gradient(120deg,color-mix(in srgb,var(--pa,#5b8cff) 82%,black),var(--pa,#5b8cff))}
   .addbig:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
 
   .bul{list-style:none;padding:0;margin:28px 0 0;border-top:1px solid var(--line)}
@@ -187,7 +182,7 @@
   function render(){
     document.title = `Veya ${p.name} — ${p.tagline}`;
     document.getElementById('crumbName').textContent = 'Veya ' + p.name;
-    const accent = p.cat === 'rest' ? '#c79bff' : '#7ad0ff';
+    const accent = activeFlavor ? activeFlavor.accent : (p.accent || (p.cat === 'rest' ? '#c79bff' : '#7ad0ff'));
     const flavorHTML = p.flavors ? `
       <div class="flavors">
         <div class="lab">Flavor — <b style="color:var(--ink)">${activeFlavor.name}</b></div>
@@ -196,7 +191,9 @@
         </div>
       </div>` : '';
 
-    document.getElementById('detail').innerHTML = `
+    const det = document.getElementById('detail');
+    det.style.setProperty('--pa', accent);
+    det.innerHTML = `
       <div class="media ${p.cat}"><div class="aura"></div>${productVisual(p, activeFlavor ? activeFlavor.img : null)}</div>
       <div class="info ${p.cat}">
         <div class="form">${p.form}</div>

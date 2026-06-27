@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Veya — Contact & Help</title>
+<meta name="description" content="Get in touch with Veya, and find answers to common questions about our focus and sleep supplements." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0b10;--bg-soft:#10121b;--panel:#14161f;--ink:#f3f4f8;--muted:#9aa0b4;
+    --line:rgba(255,255,255,.08);--focus:#5b8cff;--focus-2:#7ad0ff;--rest:#9a7bff;--rest-2:#c79bff;
+    --gold:#e9c98b;--radius:18px;--maxw:1160px;--ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;margin:0;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .narrow{max-width:780px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;padding:14px 26px;border-radius:100px;font-weight:600;font-size:15px;font-family:inherit;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+  .btn-primary{background:var(--ink);color:#0a0b10}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,255,255,.12)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(10,11,16,.72);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:'Fraunces',serif;font-size:24px;letter-spacing:.16em;font-weight:600;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--focus),var(--rest));box-shadow:0 0 16px var(--rest)}
+  .nav-links{display:flex;gap:30px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .2s}.nav-links a:hover{color:var(--ink)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  @media(max-width:780px){.nav-links{display:none}.nav-cta .btn-ghost{display:none}}
+
+  .hero{position:relative;padding:96px 0 50px;text-align:center;overflow:hidden}
+  .hero .glow{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .hero .glow span{position:absolute;border-radius:50%;filter:blur(95px);opacity:.4}
+  .hero .glow .g1{width:440px;height:440px;background:var(--focus);left:-90px;top:-40px}
+  .hero .glow .g2{width:440px;height:440px;background:var(--rest);right:-90px;top:30px}
+  .hero-in{position:relative;z-index:1}
+  .hero h1{font-size:clamp(40px,6vw,68px);margin:16px auto 0}
+  .hero h1 .it{font-style:italic;background:linear-gradient(120deg,var(--focus-2),var(--rest-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lede{max-width:540px;margin:20px auto 0;color:var(--muted);font-size:18px}
+
+  .section{padding:50px 0}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:780px){.cards{grid-template-columns:1fr}}
+  .ccard{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--bg-soft);text-align:center}
+  .ccard .ic{font-size:26px;margin-bottom:12px}
+  .ccard h3{font-size:19px;margin-bottom:6px}
+  .ccard p{color:var(--muted);font-size:14px;margin:0 0 12px}
+  .ccard a{font-weight:600;font-size:14px;color:var(--focus-2)}
+
+  .formwrap{border:1px solid var(--line);border-radius:24px;background:var(--panel);padding:38px;margin-top:8px}
+  .formwrap h2{font-size:28px;margin-bottom:6px}
+  .formwrap p.sub{color:var(--muted);font-size:15px;margin:0 0 22px}
+  .frow{display:flex;gap:14px}
+  @media(max-width:600px){.frow{flex-direction:column}}
+  .field{margin-bottom:14px;flex:1}
+  .field label{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .field input,.field textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink);
+    padding:13px 15px;border-radius:12px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
+  .field input:focus,.field textarea:focus{border-color:rgba(122,208,255,.5)}
+  .field textarea{min-height:130px;resize:vertical}
+  .formwrap .send{margin-top:6px;background:linear-gradient(120deg,var(--focus),var(--rest));color:#0a0b10}
+  .formwrap .send:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(0,0,0,.4)}
+
+  .faq{max-width:780px;margin:10px auto 0}
+  .faq h2{text-align:center;font-size:clamp(28px,4vw,40px);margin-bottom:8px}
+  .faq .sub{text-align:center;color:var(--muted);margin:0 0 28px}
+  details{border-bottom:1px solid var(--line);padding:20px 4px}
+  details summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:18px;font-weight:500;font-family:'Fraunces',serif}
+  details summary::-webkit-details-marker{display:none}
+  details summary .pm{transition:transform .3s;color:var(--muted)}
+  details[open] summary .pm{transform:rotate(45deg)}
+  details p{color:var(--muted);margin:14px 0 0;font-size:15px}
+
+  footer{border-top:1px solid var(--line);padding:48px 0 36px;margin-top:70px}
+  .foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+  .foot .about{max-width:320px}
+  .foot .about p{color:var(--muted);font-size:14px;margin:14px 0 0}
+  .foot .col h4{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;font-weight:600}
+  .foot .col a{display:block;color:#cdd1de;font-size:14px;padding:5px 0;transition:color .2s}
+  .foot .col a:hover{color:var(--ink)}
+  .legal{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:12px}
+  .disclaimer{max-width:var(--maxw);margin:20px auto 0;padding:0 24px;color:#6b7186;font-size:12px;text-align:center}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div style="background:linear-gradient(90deg,var(--focus),var(--rest));color:#0a0b10;text-align:center;font-size:13px;font-weight:600;padding:8px 16px">
+  Free shipping over $70 · 15% off your first order with code <b style="letter-spacing:.08em">CLEAR15</b>
+</div>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="brand"><span class="dot"></span>VEYA</a>
+    <nav class="nav-links">
+      <a href="index.html#products">Products</a>
+      <a href="index.html#science">Science</a>
+      <a href="about.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="index.html#products" class="btn btn-ghost">Shop</a>
+      <a href="index.html#products" class="btn btn-primary">Get Veya</a>
+      <button class="lucid-cartbtn" aria-label="Open cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 7h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 7a3 3 0 0 1 6 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <span class="cnt">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glow"><span class="g1"></span><span class="g2"></span></div>
+  <div class="wrap hero-in">
+    <div class="eyebrow">Contact &amp; Help</div>
+    <h1>We're <span class="it">here to help.</span></h1>
+    <p class="lede">Questions about a product, an order, or finding your routine? Reach out — a real person on the Veya team will get back to you, usually within one business day.</p>
+  </div>
+</section>
+
+<!-- CONTACT CARDS -->
+<section class="section">
+  <div class="wrap">
+    <div class="cards">
+      <div class="ccard reveal">
+        <div class="ic">✉️</div>
+        <h3>Email us</h3>
+        <p>The fastest way to reach us. We reply within 1 business day.</p>
+        <a href="mailto:juleshoecker3@gmail.com">juleshoecker3@gmail.com</a>
+      </div>
+      <div class="ccard reveal">
+        <div class="ic">📦</div>
+        <h3>Order help</h3>
+        <p>Tracking, changes, returns, or refunds — we've got you.</p>
+        <a href="#faq">See order FAQs →</a>
+      </div>
+      <div class="ccard reveal">
+        <div class="ic">💬</div>
+        <h3>Product questions</h3>
+        <p>Not sure which formula fits? Tell us your goal and we'll guide you.</p>
+        <a href="mailto:juleshoecker3@gmail.com?subject=Product%20question">Ask us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="section">
+  <div class="narrow">
+    <div class="formwrap reveal">
+      <h2>Send a message</h2>
+      <p class="sub">Fill this out and your email app will open with it ready to send.</p>
+      <form id="contactForm">
+        <div class="frow">
+          <div class="field"><label>Name</label><input type="text" id="cName" placeholder="Your name" required /></div>
+          <div class="field"><label>Email</label><input type="email" id="cEmail" placeholder="you@email.com" required /></div>
+        </div>
+        <div class="field"><label>Subject</label><input type="text" id="cSubject" placeholder="What's this about?" /></div>
+        <div class="field"><label>Message</label><textarea id="cMessage" placeholder="How can we help?" required></textarea></div>
+        <button type="submit" class="btn send">Send message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="faq">
+    <h2 class="reveal">Frequently asked</h2>
+    <p class="sub reveal">The quick answers. Email us anything we missed.</p>
+
+    <details class="reveal"><summary>How fast will my order ship?<span class="pm">+</span></summary>
+      <p>Orders are processed within 1–2 business days and you'll get a tracking link by email. Standard US delivery is typically 3–7 business days. Shipping is free on orders over $70.</p></details>
+    <details class="reveal"><summary>Can I take the Focus and Sleep products together?<span class="pm">+</span></summary>
+      <p>Yes — they're designed for opposite ends of your day. Take a Focus product (Brain &amp; Focus Formula or Focus Powder) in the morning, and a Sleep product (Sleep Support, Sleep Formula, or Sleep Strips) 30–60 minutes before bed.</p></details>
+    <details class="reveal"><summary>Will the Focus products keep me up at night?<span class="pm">+</span></summary>
+      <p>Our Focus range is built around clean, steady energy — Focus Powder uses L-theanine alongside natural caffeine to smooth out the jitters and crash. Take it earlier in the day and it won't interfere with your sleep.</p></details>
+    <details class="reveal"><summary>Are the Sleep products habit-forming?<span class="pm">+</span></summary>
+      <p>No. Our Sleep range uses low-dose, naturally-derived ingredients — magnesium, botanicals, and a measured amount of melatonin — to work with your own sleep cycle. They're non-habit forming.</p></details>
+    <details class="reveal"><summary>What's your return policy?<span class="pm">+</span></summary>
+      <p>Try Veya for 30 days. If you're not satisfied, email us for a full refund of the product price — no need to return the bottle. Subscriptions can be paused or cancelled anytime.</p></details>
+    <details class="reveal"><summary>Do you ship internationally?<span class="pm">+</span></summary>
+      <p>Yes — we ship to most countries via USPS and DHL, with rates and delivery times calculated at checkout based on your destination.</p></details>
+    <details class="reveal"><summary>Are your supplements third-party tested?<span class="pm">+</span></summary>
+      <p>Yes. Every formula is made in the USA and third-party tested for purity and potency, with full ingredient transparency — no proprietary blends.</p></details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot">
+    <div class="col about">
+      <div class="brand"><span class="dot"></span>VEYA</div>
+      <p>Clean, science-backed supplements for focus by day and rest by night. Made for people who refuse to choose between performance and recovery.</p>
+    </div>
+    <div class="col">
+      <h4>Shop</h4>
+      <a href="index.html#products">Focus &amp; Brain</a>
+      <a href="index.html#products">Sleep &amp; Rest</a>
+    </div>
+    <div class="col">
+      <h4>Learn</h4>
+      <a href="index.html#science">Our science</a>
+      <a href="about.html">Our story</a>
+      <a href="contact.html#faq">FAQ</a>
+    </div>
+    <div class="col">
+      <h4>Company</h4>
+      <a href="about.html">About us</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <div>© 2026 Veya Supplements. All rights reserved.</div>
+    <div>Privacy · Terms · Accessibility</div>
+  </div>
+  <p class="disclaimer">These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your physician before use, especially if pregnant, nursing, or taking medication.</p>
+</footer>
+
+<script src="catalog.js"></script>
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%3*0.06)+'s'; io.observe(el); });
+
+  document.getElementById('contactForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=encodeURIComponent(document.getElementById('cName').value);
+    const email=document.getElementById('cEmail').value;
+    const subj=encodeURIComponent(document.getElementById('cSubject').value || 'Message from the Veya website');
+    const msg=encodeURIComponent(document.getElementById('cMessage').value + '\n\n— ' + decodeURIComponent(name) + ' (' + email + ')');
+    window.location.href='mailto:juleshoecker3@gmail.com?subject='+subj+'&body='+msg;
+  });
+</script>
+</body>
+</html>
